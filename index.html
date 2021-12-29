@@ -83,37 +83,41 @@
   <body>
     <a-scene renderer="logarithmicDepthBuffer: true" embedded arjs>
       <a-entity id="bulletTemplate" bullet geometry="primitive:sphere; radius:0.1;"
-            material="color: orange" rotation="90 0 0"></a-entity> 
+            material="color: #FFBE1A" rotation="90 0 0"></a-entity> 
 
-      <a-box target="healthPoints: 20" position="-1 1 -5" rotation="0 45 0" color="#4CC3D9" hit-handler>
+      <a-box target="healthPoints: 20" position="-1 1 -5" rotation="0 45 0" color="#4CC3D9" hit-handler
+      animation="property:rotation; to:0 360 0;dur:7000; loop:true; easing:linear">
         <a-entity id="health" position="0 1 0" geometry="primitive: plane; width: 1; height: 0.15" material="color: #333"
           text="color: #42f2ff; align: left; value: IIIIIIIIIIIIIIIIIIII; width: 4;xOffset:1.5; ">
         <a-image src="healthIcon.jpg" width="0.2" height="0.2" position="-0.6 0 0"></a-image>
       </a-box>
 
-      <a-sphere target="healthPoints: 20" position="3 1 -8" radius="1.25" color="#EF2D5E" hit-handler>
+      <a-sphere target="healthPoints: 20" position="3 1.5 -8" radius="1.25" color="#EF2D5E" hit-handler>
         <a-entity id="health" position="0 2 0" geometry="primitive: plane; width: 1; height: 0.15" material="color: #333"
           text="color: #42f2ff; align: left; value: IIIIIIIIIIIIIIIIIIII; width: 4;xOffset:1.5; ">
         <a-image src="healthIcon.jpg" width="0.2" height="0.2" position="-0.6 0.1 0"></a-image>
       </a-sphere>
 
-      <a-entity target="healthPoints: 20" gltf-model="models/bombblue.glb" scale = "0.2 0.2 0.2" position = "15 5 5" hit-handler>
+      <a-entity target="healthPoints: 20" gltf-model="models/bombblue.glb" scale = "0.2 0.2 0.2" position = "3 5 -5" hit-handler
+      animation="property:rotation; to:0 360 0;dur:7000; loop:true; easing:linear">
         <a-entity id="health" position="0 7 0" geometry="primitive: plane; width: 1; height: 0.15" material="color: #333"
           text="color: #42f2ff; align: left; value: IIIIIIIIIIIIIIIIIIII; width: 4;xOffset:1.5; ">
         <a-image src="healthIcon.jpg" width="0.2" height="0.2" position="-0.6 0.1 0"></a-image>
       </a-entity>
       </a-entity>
 
-      <a-entity target="healthPoints: 20" gltf-model="models/bombgreen.glb" scale = "0.2 0.2 0.2" position = "-5 5 5" hit-handler>
+      <a-entity target="healthPoints: 20" gltf-model="models/bombgreen.glb" scale = "0.2 0.2 0.2" position = "-5 5 -5" hit-handler
+      animation="property:rotation; to:0 360 0;dur:7000; loop:true; easing:linear">
         <a-entity id="health" position="0 7 0" geometry="primitive: plane; width: 1; height: 0.15" material="color: #333"
           text="color: #42f2ff; align: left; value: IIIIIIIIIIIIIIIIIIII; width: 4;xOffset:1.5; ">
         <a-image src="healthIcon.jpg" width="0.2" height="0.2" position="-0.6 0.1 0"></a-image>
       </a-entity>
       </a-entity>
       <a-camera id="camera"  position="-1 1 0">
-        
-        <a-box color="tomato" depth="0.5" height="0.1" width="0.1" position="0.3 -0.05 -1.5" rotation="0 0 0"
-      shooter click-to-shoot></a-box>
+          <a-entity position="0.5 -0.1 -2" shooter click-to-shoot>
+            <a-entity gltf-model="models/gun2.glb" scale = "5 5 5" rotation="0 -80 0">
+            </a-entity>
+          </a-entity>
       </a-camera>
     </a-scene>
   </body>
