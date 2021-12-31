@@ -2,7 +2,7 @@
   <head>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="./aframe-super-shooter-kit.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script> -->
 
     <script>
       /**     * Click mouse to shoot.     */ 
@@ -45,6 +45,16 @@
               return "I".repeat(numRepeat);
             }
 
+            function shrink(el){
+              // this function shrinks the orb by 10% whenever it gets hit
+
+              let shrinkFactor=0.98;
+              let scale = el.getAttribute("scale").clone();
+              scale.multiplyScalar(shrinkFactor);
+              console.log("Scale :",scale);
+              el.setAttribute("scale",scale);
+
+            }
             function deathAnimation(el){
               var dieAnim= document.createElement("a-entity");
               dieAnim.setAttribute('gltf-model','models/boom.glb');
@@ -61,6 +71,7 @@
 
             el.addEventListener("hit", () => {
               color.addScalar(0.05);
+              shrink(el);
               el.components.material.material.color.copy(color);
               var health = el.components.target.healthPoints;
               txt.setAttribute("text", "value", healthStat(health, 20));
@@ -98,7 +109,7 @@
         <a-image src="healthIcon.jpg" width="0.2" height="0.2" position="-0.6 0.1 0"></a-image>
       </a-sphere>
 
-      <a-entity target="healthPoints: 20" gltf-model="models/bombblue.glb" scale = "0.2 0.2 0.2" position = "3 5 -5" hit-handler
+      <a-entity target="healthPoints: 60" gltf-model="models/bombblue.glb" scale = "0.2 0.2 0.2" position = "3 5 -5" hit-handler
       animation="property:rotation; to:0 360 0;dur:7000; loop:true; easing:linear">
         <a-entity id="health" position="0 7 0" geometry="primitive: plane; width: 1; height: 0.15" material="color: #333"
           text="color: #42f2ff; align: left; value: IIIIIIIIIIIIIIIIIIII; width: 4;xOffset:1.5; ">
@@ -106,7 +117,7 @@
       </a-entity>
       </a-entity>
 
-      <a-entity target="healthPoints: 20" gltf-model="models/bombgreen.glb" scale = "0.2 0.2 0.2" position = "-5 5 -5" hit-handler
+      <a-entity target="healthPoints: 40" gltf-model="models/bombgreen.glb" scale = "0.2 0.2 0.2" position = "-5 5 -5" hit-handler
       animation="property:rotation; to:0 360 0;dur:7000; loop:true; easing:linear">
         <a-entity id="health" position="0 7 0" geometry="primitive: plane; width: 1; height: 0.15" material="color: #333"
           text="color: #42f2ff; align: left; value: IIIIIIIIIIIIIIIIIIII; width: 4;xOffset:1.5; ">
@@ -119,6 +130,9 @@
             </a-entity>
           </a-entity>
       </a-camera>
+      <a-marker type="pattern" url="markers/pattern-marker.patt">
+        <a-entity gltf-model="models/gun2.glb" scale = "5 5 5" rotation="0 -80 0">
+      </a-marker>
     </a-scene>
   </body>
 </html>
